@@ -1,9 +1,9 @@
 import { Hono } from 'hono'
+import { mainRoute } from './routes/mainRoutes'
 
 const app = new Hono()
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
+// route
+app.route('api/v1',mainRoute)
 
 export default app
