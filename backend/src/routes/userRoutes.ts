@@ -1,25 +1,41 @@
 import { Hono } from "hono";
 import { signupUser } from "../services/userService";
+import { env } from "hono/adapter";
 
 export const userRoute = new Hono<{
-  Bindings: { DATABASE_URL: string }
-}>()
+  Bindings: { 
+    DATABASE_URL: string;
+    JWT_SECRET: string;
+  };
+}>();
 
-userRoute.post('/signup', async (c) => {
+userRoute.post("/signup", async (c) => {
   try {
-    const { email, name, password } = await c.req.json()
-    const user = await signupUser(c.env.DATABASE_URL, email, name, password)
-    return c.json({
-      message: 'new user created',
-      user
-    })
-  } catch (e: any) {
-    return c.json({
-      error: e.message
-    }, 400)
-  }
-})
+    const { email, name, password } = await c.req.json();
+    const { JWT_SECRET } = env<{ JWT_SECRET: string }>(c);
 
-userRoute.post('/signin', (c) => {
-  return c.text('signin')
-})
+    const { newUser, jwt_token } = await signupUser(
+      c.env.DATABASE_URL,
+      email,
+      name,
+      password,
+      JWT_SECRET
+    );
+    return c.json({
+      message: "new user created",
+      newUser,
+      jwt_token,
+    });
+  } catch (e: any) {
+    return c.json(
+      {
+        error: e.message,
+      },
+      400
+    );
+  }
+});
+
+userRoute.post("/signin", (c) => {
+  return c.text("signin");
+});

@@ -3,7 +3,8 @@ import { mainRoute } from './routes/mainRoutes'
 
 const app = new Hono<{
     Bindings : {
-        DATABASE_URL : string
+        DATABASE_URL: string ,
+        JWT_SECRET : string
     }
 }>
 
