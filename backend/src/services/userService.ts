@@ -32,3 +32,31 @@ export async function signupUser(
     jwt_token
   } ;
 }
+
+export async function signinUser(
+  database_url : string,
+  jwt_secret : string,
+  email : string,
+  password : string
+){
+  const prisma = new PrismaClient({
+    datasourceUrl : database_url
+  }).$extends(withAccelerate());
+
+  const isExisitingUser = await prisma.user.findUnique({
+    where: { email },
+  });
+
+  if (!isExisitingUser) {
+    throw new Error("user not found");
+  }
+
+  // check the password 
+  if(isExisitingUser.password !== password){
+    throw new Error('Invalid email or password')
+  }
+
+  const jwt_token = await sign({id:isExisitingUser.id},jwt_secret);
+
+  return {user:isExisitingUser,jwt_token};
+}

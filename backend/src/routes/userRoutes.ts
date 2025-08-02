@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { signupUser } from "../services/userService";
+import { signinUser, signupUser } from "../services/userService";
 import { env } from "hono/adapter";
 
 export const userRoute = new Hono<{
@@ -36,6 +36,26 @@ userRoute.post("/signup", async (c) => {
   }
 });
 
-userRoute.post("/signin", (c) => {
-  return c.text("signin");
+userRoute.post("/signin", async (c) => {
+  try {
+    const { email , password } = await c.req.json();
+    const {JWT_SECRET} = env<{JWT_SECRET : string}>(c);
+    // pass the data to the fun
+    const {user,jwt_token} = await signinUser(
+      c.env.DATABASE_URL,
+      JWT_SECRET,
+      email,
+      password
+    );
+
+    return c.json({
+      message : 'welcome user',
+      user,
+      jwt_token
+    })
+  } catch (e : any) {
+     return c.json({
+      error : e.message
+     });
+  }
 });
