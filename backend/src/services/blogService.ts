@@ -12,58 +12,52 @@ export async function createBlog(
   }).$extends(withAccelerate());
 
   // create new blog and store in db
-  const newBlog =  await prisma.blog.create({
-    data : {title , content ,authorId}
+  const newBlog = await prisma.blog.create({
+    data: { title, content, authorId },
   });
 
   return {
-    newBlog
+    newBlog,
   };
 }
 
 export async function updateBlog(
   db_url: string,
-  id : string,
+  id: string,
   title: string,
-  content: string,
+  content: string
 ) {
   const prisma = new PrismaClient({
     datasourceUrl: db_url,
   }).$extends(withAccelerate());
 
-  // update blog 
+  // update blog
   const updatedBlog = await prisma.blog.update({
-    where : { id },
-    data : {title , content}
+    where: { id },
+    data: { title, content },
   });
 
   return {
-    updatedBlog
-  }
+    updatedBlog,
+  };
 }
 
-export async function getBlogId(
-  db_url: string,
-  id : string,
-) {
+export async function getBlogId(db_url: string, id: string) {
   const prisma = new PrismaClient({
     datasourceUrl: db_url,
   }).$extends(withAccelerate());
 
   // get blog by id
-  const blog =  await prisma.blog.findUnique({
-    where : { id },
+  const blog = await prisma.blog.findUnique({
+    where: { id },
   });
 
   return {
-    blog
-  }
+    blog,
+  };
 }
 
-export async function getBlogs(
-  db_url: string,
-  page : number = 1 
-) {
+export async function getBlogs(db_url: string, page: number = 1) {
   const prisma = new PrismaClient({
     datasourceUrl: db_url,
   }).$extends(withAccelerate());
@@ -74,16 +68,20 @@ export async function getBlogs(
   // get blog by id
   const blogs = await prisma.blog.findMany({
     skip,
-    take : limit,
+    take: limit,
     orderBy: {
-      createdAt: 'desc',
+      createdAt: "desc",
     },
-    author : true
+    include: {
+      author: true,
+    },
   });
 
   const total = await prisma.blog.count();
 
   return {
-    blogs
+    blogs,
+    total,
+    page,
   };
 }
