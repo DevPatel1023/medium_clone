@@ -72,10 +72,8 @@ export async function getBlogs(db_url: string, page: number = 1) {
     orderBy: {
       createdAt: "desc",
     },
-    include: {
-      author: true,
-    },
   });
+  console.log("DEBUG blogs from DB:", blogs);
 
   const total = await prisma.blog.count();
 
