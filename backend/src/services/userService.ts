@@ -1,5 +1,6 @@
 import { PrismaClient } from "../generated/prisma/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
+import bcrypt from "bcryptjs";
 import { sign } from "hono/jwt";
 
 export async function signupUser(
@@ -21,8 +22,11 @@ export async function signupUser(
     throw new Error("user already exists");
   }
 
+  // hash pass using bcrypt
+  const hashedPassword = await bcrypt.hash(password,10);
+
   const newUser = await prisma.user.create({
-    data: { email, name, password },
+    data: { email, name, password:hashedPassword },
   });
 
   const jwt_token = await sign({ id: newUser.id }, jwt_secret);
@@ -51,8 +55,9 @@ export async function signinUser(
     throw new Error("user not found");
   }
 
-  // check the password 
-  if(isExisitingUser.password !== password){
+  const isPasswordValid = await bcrypt.compare(password,isExisitingUser.password)
+  // check when the password is not correct
+  if(!isPasswordValid){
     throw new Error('Invalid email or password')
   }
 
