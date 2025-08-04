@@ -12,6 +12,12 @@ export const userRoute = new Hono<{
 userRoute.post("/signup", async (c) => {
   try {
     const { email, name, password } = await c.req.json();
+    // sanatize body using zod
+    // {
+    //   email : string,
+    //   username : string,
+    //   password : string,
+    // }
     const { JWT_SECRET } = env<{ JWT_SECRET: string }>(c);
 
     const { newUser, jwt_token } = await signupUser(

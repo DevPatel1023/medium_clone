@@ -6,6 +6,13 @@ import {
   updateBlog,
 } from "../services/blogService";
 
+//  zod scema 
+// {
+//   title : string,
+//   content : string,
+//   user : string,
+//   authorId : string,
+// }
 
 export const blogRoute = new Hono<{
   Bindings: {
@@ -33,7 +40,7 @@ blogRoute.post("/create", async (c) => {
   } catch (error) {
     return c.json(
       {
-        error,
+        error : "error while creating a blog",
       },
       400
     );
@@ -56,7 +63,7 @@ blogRoute.put("/:id", async (c) => {
   } catch (error) {
     return c.json(
       {
-        error,
+        error : "error while updating a blog",
       },
       400
     );
@@ -73,7 +80,7 @@ blogRoute.get("/blogs", async (c) => {
   } catch (error) {
     return c.json(
       {
-        error,
+        error : "error while getting blogs",
       },
       400
     );
