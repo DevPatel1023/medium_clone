@@ -5,8 +5,12 @@ import {
   getBlogs,
   updateBlog,
 } from "../services/blogService";
+import {
+  createBlogSchema,
+  updateBlogSchema,
+} from "@adp_2sdcp/common-medium-clone";
 
-//  zod scema 
+//  zod scema
 // {
 //   title : string,
 //   content : string,
@@ -17,18 +21,33 @@ import {
 export const blogRoute = new Hono<{
   Bindings: {
     DATABASE_URL: string;
-  },
-  Variables : {
-    user : any
-  }
+  };
+  Variables: {
+    user: any;
+  };
 }>();
 
 // create blog
 blogRoute.post("/create", async (c) => {
   try {
-    const user = c.get('user');
+    const user = c.get("user");
     const { title, content } = await c.req.json();
     const authorId = user.id;
+
+    // validating inputs via zod
+    const result = createBlogSchema.safeParse({
+      title,
+      content,
+    });
+
+    if (!result.success) {
+      return c.json(
+        {
+          error: "Invalid inputs",
+          details: result.error.flatten(),
+        },400
+      );
+    }
 
     const { newBlog } = await createBlog(
       c.env.DATABASE_URL,
@@ -40,7 +59,7 @@ blogRoute.post("/create", async (c) => {
   } catch (error) {
     return c.json(
       {
-        error : "error while creating a blog",
+        error: "error while creating a blog",
       },
       400
     );
@@ -53,6 +72,22 @@ blogRoute.put("/:id", async (c) => {
     const { id } = await c.req.param();
     const { title, content } = await c.req.json();
 
+    const result = createBlogSchema.safeParse({
+      title,
+      content,
+      id 
+    });
+
+    if (!result.success) {
+      return c.json(
+        {
+          error: "Invalid inputs",
+          details: result.error.flatten(),
+        },400
+      );
+    }
+
+
     const { updatedBlog } = await updateBlog(
       c.env.DATABASE_URL,
       id,
@@ -63,7 +98,7 @@ blogRoute.put("/:id", async (c) => {
   } catch (error) {
     return c.json(
       {
-        error : "error while updating a blog",
+        error: "error while updating a blog",
       },
       400
     );
@@ -73,20 +108,17 @@ blogRoute.put("/:id", async (c) => {
 // get all blogs
 blogRoute.get("/blogs", async (c) => {
   try {
-    const { blogs, total, page } = await getBlogs(
-      c.env.DATABASE_URL
-    );
-    return c.json({blogs, total, page});
+    const { blogs, total, page } = await getBlogs(c.env.DATABASE_URL);
+    return c.json({ blogs, total, page });
   } catch (error) {
     return c.json(
       {
-        error : "error while getting blogs",
+        error: "error while getting blogs",
       },
       400
     );
   }
 });
-
 
 // get blog by id
 blogRoute.get("/:id", async (c) => {
@@ -104,4 +136,3 @@ blogRoute.get("/:id", async (c) => {
     );
   }
 });
-

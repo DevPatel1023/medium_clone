@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { signinUser, signupUser } from "../services/userService";
 import { env } from "hono/adapter";
-import { signInInput, signupInput } from "@adp_2sdcp/common-medium-clone";
+import { signUpSchema, signInSchema } from "@adp_2sdcp/common-medium-clone";
 
 export const userRoute = new Hono<{
   Bindings: {
@@ -20,9 +20,10 @@ userRoute.post("/signup", async (c) => {
     //   password : string,
     // }
 
-    const result = signupInput.safeParse({ email, password, username: name });
+    const result = signUpSchema.safeParse({ email, password, username: name });
     if (!result.success) {
-      return c.json({ error: result.error.format() }, 411);
+      return c.json({ 
+        message : "invalid input",error: result.error.format() }, 411);
     }
 
     const { JWT_SECRET } = env<{ JWT_SECRET: string }>(c);
@@ -53,9 +54,11 @@ userRoute.post("/signin", async (c) => {
   try {
     const { email, password } = await c.req.json();
 
-    const result = signupInput.safeParse({ email, password });
+    const result = signInSchema.safeParse({ email, password });
     if (!result.success) {
-      return c.json({ error: result.error.format() }, 411);
+      return c.json({
+        message : "invalid input",
+        error: result.error.format() }, 411);
     }
     const { JWT_SECRET } = env<{ JWT_SECRET: string }>(c);
     // pass the data to the fun
