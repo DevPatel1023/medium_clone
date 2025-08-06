@@ -6,7 +6,9 @@ const Signup = () => {
       <div className="flex justify-center items-center">
       signup
       </div>
+      <div className="hidden md:flex h-full">
       <Quote />
+      </div>
     </div>
   )
 }
