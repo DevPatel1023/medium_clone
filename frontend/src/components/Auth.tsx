@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import Input from "./Input";
 import Button from "./Button";
-
 import type { AuthProps } from "../types/AuthProps";
 
 const Auth = ({ type, inputs, setInputs, onSubmit }: AuthProps) => {

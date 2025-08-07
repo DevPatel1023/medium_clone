@@ -29,7 +29,7 @@ const submitData = async () => {
     <div className="grid md:grid-cols-2 h-screen">
       <div className="flex justify-center items-center">
       <Auth
-          type="signin"
+          type="signup"
           inputs={inputs}
           setInputs={setInputs}
           onSubmit={submitData}
