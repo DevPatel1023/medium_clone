@@ -6,5 +6,5 @@ export type AuthProps = {
         password : string;
     }
     setInputs : React.Dispatch<React.SetStateAction<any>>;
-    onSubmit : () => void;
+    onSubmit : (e: React.FormEvent) => void;
 }

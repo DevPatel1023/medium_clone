@@ -5,7 +5,7 @@ import type { AuthProps } from "../types/AuthProps";
 
 const Auth = ({ type, inputs, setInputs, onSubmit }: AuthProps) => {
   return (
-    <div className="flex flex-col w-full max-w-md mx-auto px-4 space-y-4">
+    <form onSubmit={onSubmit} className="flex flex-col w-full max-w-md mx-auto px-4 space-y-4">
       <h1 className="text-4xl font-bold">
         {type === "signup" ? "Create an account" : "Login"}
       </h1>
@@ -53,10 +53,10 @@ const Auth = ({ type, inputs, setInputs, onSubmit }: AuthProps) => {
         />
       </div>
 
-      <Button onSubmit={onSubmit}>
+      <Button type="submit">
         {type === "signin" ? "Sign in" : "Sign up"}
       </Button>
-    </div>
+    </form>
   );
 };
 
