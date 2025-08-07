@@ -32,7 +32,7 @@ const Signup = () => {
 
       const jwt = response.data.jwt_token;
       localStorage.setItem("token", jwt);
-      navigate("/blog");
+      navigate("/blogs");
     } catch (error: any) {
       console.log("Error while signing up:", error);
     }

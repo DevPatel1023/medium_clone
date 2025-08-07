@@ -30,7 +30,7 @@ const Signin = () => {
       
       const jwt = res.data.jwt_token;
       localStorage.setItem("token", jwt);
-      navigate("/blog");
+      navigate("/blogs");
     } catch (error: any) {
       console.log("Error while signing in:", error);
       // Add better error handling
