@@ -1,1 +1,6 @@
 /src
+"files": [
+  "dist",
+  "index.js",
+  "index.d.ts"
+]

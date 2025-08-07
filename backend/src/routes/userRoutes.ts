@@ -35,6 +35,7 @@ userRoute.post("/signup", async (c) => {
       password,
       JWT_SECRET
     );
+    
     return c.json({
       message: "new user created",
       newUser,
