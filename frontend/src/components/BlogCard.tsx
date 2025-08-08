@@ -1,8 +1,10 @@
+import Avatar from "./Avatar";
+
 interface BlogCardProps {
   authorName: string;
   title: string;
   content: string;
-  publishedDate: Date;
+  publishedDate: string;
 }
 
 const BlogCard = ({
@@ -11,15 +13,26 @@ const BlogCard = ({
   content,
   publishedDate,
 }: BlogCardProps) => {
+  const countWords: number = content.trim().split(/\s+/).length;
   return (
-    <div>
+    <div className="border-b pb-5 border-gray-200">
       {/* user details */}
-      <div>
-        <p>By {authorName}</p>
-        <small>{publishedDate.toDateString()}</small>
+      <div className="flex flex-row space-x-3">
+        <Avatar name={authorName} />
+        <p className="font-thin text-black">{authorName} . </p>
       </div>
-      <h2>{title}</h2>
-      <p>{content.slice(0, 100)}</p>
+      {/* content */}
+      <div>
+        <h1 className="font-bold text-2xl">{title}</h1>
+        <p>{content.slice(0, 100)}</p>
+      </div>
+      {/* footer */}
+      <div>
+        {/* read time calculation */}
+        <small>{publishedDate}</small>
+
+        {`${Math.ceil(countWords / 200)} min read`}
+      </div>
     </div>
   );
 };
