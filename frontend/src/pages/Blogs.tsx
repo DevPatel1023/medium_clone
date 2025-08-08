@@ -19,6 +19,24 @@ const Blogs = () => {
       content= "Artificial intelligence is revolutionizing how we build web applications. From automated code generation to intelligent user interfaces, AI tools are becoming indispensable for modern developers. In this comprehensive guide, we'll explore the cutting-edge AI technologies that are reshaping the development landscape and how you can leverage them in your projects."
       publishedDate= "2025-01-15"
         />
+        <BlogCard
+          authorName= "Sarah Chen"
+      title= "The Future of Artificial Intelligence in Web Development"
+      content= "Artificial intelligence is revolutionizing how we build web applications. From automated code generation to intelligent user interfaces, AI tools are becoming indispensable for modern developers. In this comprehensive guide, we'll explore the cutting-edge AI technologies that are reshaping the development landscape and how you can leverage them in your projects."
+      publishedDate= "2025-01-15"
+        />
+        <BlogCard
+          authorName= "Sarah Chen"
+      title= "The Future of Artificial Intelligence in Web Development"
+      content= "Artificial intelligence is revolutionizing how we build web applications. From automated code generation to intelligent user interfaces, AI tools are becoming indispensable for modern developers. In this comprehensive guide, we'll explore the cutting-edge AI technologies that are reshaping the development landscape and how you can leverage them in your projects."
+      publishedDate= "2025-01-15"
+        />
+        <BlogCard
+          authorName= "Sarah Chen"
+      title= "The Future of Artificial Intelligence in Web Development"
+      content= "Artificial intelligence is revolutionizing how we build web applications. From automated code generation to intelligent user interfaces, AI tools are becoming indispensable for modern developers. In this comprehensive guide, we'll explore the cutting-edge AI technologies that are reshaping the development landscape and how you can leverage them in your projects."
+      publishedDate= "2025-01-15"
+        />
       </div>
     </div>
   );
