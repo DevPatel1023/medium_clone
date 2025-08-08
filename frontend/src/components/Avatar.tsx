@@ -15,12 +15,11 @@ const getInitials = (name: string) => {
   return (first + last).toLowerCase();
 };
 
-const Avatar = ({ name }: { name: string }) => {
+const Avatar = ({ name } : {name : string}) => {
+  const initials = getInitials(name).toUpperCase();
   return (
-    <div className="flex items-center justify-center w-6 h-6 rounded-full bg-gray-500 text-white">
-      <span className="text-xs font-semibold leading-none">
-        {getInitials(name)}
-      </span>
+    <div className="w-8 h-8 rounded-full bg-gray-400 flex items-center justify-center text-white text-sm font-semibold">
+      {initials}
     </div>
   );
 };
