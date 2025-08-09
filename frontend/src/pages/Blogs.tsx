@@ -1,6 +1,15 @@
 import BlogCard from "../components/BlogCard";
+import BlogSkeleton from "../components/BlogSkeleton";
+import { useBlogs } from "../hooks/useBlogs";
 
 const Blogs = () => {
+  const {loading , blogs} = useBlogs();
+
+  if(loading){
+    return <div>
+      <BlogSkeleton />
+    </div>
+  }
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}

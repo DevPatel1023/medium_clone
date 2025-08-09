@@ -15,10 +15,46 @@ const getInitials = (name: string) => {
   return (first + last).toLowerCase();
 };
 
+//predefined colors fun to generate the colors 
+const getColorFromName = (name: string) => {
+  const colors = [
+    'bg-blue-500 text-white',
+    'bg-green-500 text-white',
+    'bg-purple-500 text-white',
+    'bg-red-500 text-white',
+    'bg-yellow-500 text-black',
+    'bg-indigo-500 text-white',
+    'bg-pink-500 text-white',
+    'bg-teal-500 text-white',
+    'bg-orange-500 text-white',
+    'bg-cyan-500 text-black',
+    'bg-emerald-500 text-white',
+    'bg-violet-500 text-white',
+    'bg-rose-500 text-white',
+    'bg-amber-500 text-black',
+    'bg-lime-500 text-black',
+    'bg-sky-500 text-white',
+    'bg-fuchsia-500 text-white',
+    'bg-slate-500 text-white',
+    'bg-stone-500 text-white',
+    'bg-zinc-500 text-white',
+  ];
+  
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    const char = name.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash; 
+  }
+  
+  const index = Math.abs(hash) % colors.length;
+  return colors[index];
+};
 const Avatar = ({ name } : {name : string}) => {
   const initials = getInitials(name).toUpperCase();
+  const colorClass : string =  getColorFromName(name);
   return (
-    <div className="w-8 h-8 rounded-full bg-gray-400 flex items-center justify-center text-white text-sm font-semibold">
+    <div className={`w-8 h-8 rounded-full ${colorClass} flex items-center justify-center  text-sm font-semibold`}>
       {initials}
     </div>
   );
