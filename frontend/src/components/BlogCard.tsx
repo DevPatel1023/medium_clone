@@ -21,7 +21,7 @@ const BlogCard = ({
 
   return (
     <article className="group cursor-pointer w-full">
-      <div className=" py-8 px-0 border-b border-gray-100 ">
+      <div className=" py-8 px-0 border-b border-gray-100 " >
         {/* Author Info */}
         <div className="flex items-center gap-3 mb-4">
           <Avatar name={authorName} />

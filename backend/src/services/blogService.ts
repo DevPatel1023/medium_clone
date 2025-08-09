@@ -65,14 +65,26 @@ export async function getBlogs(db_url: string, page: number = 1) {
   const limit = 10;
   const skip = (page - 1) * limit;
 
-  // get blog by id
-  const blogs = await prisma.blog.findMany({
-    skip,
-    take: limit,
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
+  // get blogS
+ const blogs = await prisma.blog.findMany({
+  skip,
+  take: limit,
+  orderBy: {
+    createdAt: "desc",
+  },
+  select : {
+    id: true,
+    title: true,
+    content: true,
+    createdAt: true, // Add this
+    author : {
+      select : {
+        name : true
+      }
+    }
+  }
+});
+
   console.log("DEBUG blogs from DB:", blogs);
 
   const total = await prisma.blog.count();

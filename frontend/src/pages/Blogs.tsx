@@ -3,12 +3,14 @@ import BlogSkeleton from "../components/BlogSkeleton";
 import { useBlogs } from "../hooks/useBlogs";
 
 const Blogs = () => {
-  const {loading , blogs} = useBlogs();
+  const { loading, blogs } = useBlogs();
 
-  if(loading){
-    return <div>
-      <BlogSkeleton />
-    </div>
+  if (loading) {
+    return (
+      <div>
+        <BlogSkeleton />
+      </div>
+    );
   }
   return (
     <div className="min-h-screen bg-white">
@@ -22,30 +24,15 @@ const Blogs = () => {
             Discover insights, tutorials, and stories from our community
           </p>
         </div>
-        <BlogCard
-          authorName= "Sarah Chen"
-      title= "The Future of Artificial Intelligence in Web Development"
-      content= "Artificial intelligence is revolutionizing how we build web applications. From automated code generation to intelligent user interfaces, AI tools are becoming indispensable for modern developers. In this comprehensive guide, we'll explore the cutting-edge AI technologies that are reshaping the development landscape and how you can leverage them in your projects."
-      publishedDate= "2025-01-15"
-        />
-        <BlogCard
-          authorName= "Sarah Chen"
-      title= "The Future of Artificial Intelligence in Web Development"
-      content= "Artificial intelligence is revolutionizing how we build web applications. From automated code generation to intelligent user interfaces, AI tools are becoming indispensable for modern developers. In this comprehensive guide, we'll explore the cutting-edge AI technologies that are reshaping the development landscape and how you can leverage them in your projects."
-      publishedDate= "2025-01-15"
-        />
-        <BlogCard
-          authorName= "Sarah Chen"
-      title= "The Future of Artificial Intelligence in Web Development"
-      content= "Artificial intelligence is revolutionizing how we build web applications. From automated code generation to intelligent user interfaces, AI tools are becoming indispensable for modern developers. In this comprehensive guide, we'll explore the cutting-edge AI technologies that are reshaping the development landscape and how you can leverage them in your projects."
-      publishedDate= "2025-01-15"
-        />
-        <BlogCard
-          authorName= "Sarah Chen"
-      title= "The Future of Artificial Intelligence in Web Development"
-      content= "Artificial intelligence is revolutionizing how we build web applications. From automated code generation to intelligent user interfaces, AI tools are becoming indispensable for modern developers. In this comprehensive guide, we'll explore the cutting-edge AI technologies that are reshaping the development landscape and how you can leverage them in your projects."
-      publishedDate= "2025-01-15"
-        />
+        {blogs.map((blog) => (
+          <BlogCard
+          key={blog.id}
+            authorName={blog.author.name || "Anonymous"}
+            title={blog.title}
+            content={blog.content}
+            publishedDate={(blog.createdAt)}
+          />
+        ))}
       </div>
     </div>
   );
