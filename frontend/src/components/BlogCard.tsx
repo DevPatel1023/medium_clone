@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { capitalizeWords } from "../utils/capitalizeWords";
 import { formatDate } from "../utils/FormatDate";
 import Avatar from "./Avatar";
@@ -7,6 +8,7 @@ interface BlogCardProps {
   title: string;
   content: string;
   publishedDate: string;
+  id : number
 }
 
 const BlogCard = ({
@@ -14,12 +16,14 @@ const BlogCard = ({
   title,
   content,
   publishedDate,
+  id
 }: BlogCardProps) => {
   const countWords: number = content.trim().split(/\s+/).length;
   const readTime = Math.ceil(countWords / 200);
 
 
   return (
+    <Link to={`/blog/${id}`}>
     <article className="group cursor-pointer w-full">
       <div className=" py-8 px-0 border-b border-gray-100 " >
         {/* Author Info */}
@@ -62,6 +66,7 @@ const BlogCard = ({
         </div>
       </div>
     </article>
+    </Link>
   );
 };
 

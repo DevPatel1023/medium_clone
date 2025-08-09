@@ -50,6 +50,16 @@ export async function getBlogId(db_url: string, id: string) {
   // get blog by id
   const blog = await prisma.blog.findUnique({
     where: { id },
+    select: {
+      title: true,
+      content: true,
+      createdAt: true,
+      author: {
+        select: {
+          name: true,
+        },
+      },
+    },
   });
 
   return {
@@ -66,24 +76,24 @@ export async function getBlogs(db_url: string, page: number = 1) {
   const skip = (page - 1) * limit;
 
   // get blogS
- const blogs = await prisma.blog.findMany({
-  skip,
-  take: limit,
-  orderBy: {
-    createdAt: "desc",
-  },
-  select : {
-    id: true,
-    title: true,
-    content: true,
-    createdAt: true, // Add this
-    author : {
-      select : {
-        name : true
-      }
-    }
-  }
-});
+  const blogs = await prisma.blog.findMany({
+    skip,
+    take: limit,
+    orderBy: {
+      createdAt: "desc",
+    },
+    select: {
+      id: true,
+      title: true,
+      content: true,
+      createdAt: true, // Add this
+      author: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  });
 
   console.log("DEBUG blogs from DB:", blogs);
 
