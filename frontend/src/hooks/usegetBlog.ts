@@ -31,7 +31,6 @@ export const useGetBlog = (id: string) => {
         },
       })
       .then((response) => {
-        console.log("API response:", response);
         if (response.data) {
           setBlog(response.data);
         } else {

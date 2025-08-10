@@ -1,3 +1,5 @@
+import type { AvatarProps } from "../types/AvatarProps";
+
 const getInitials = (name: string) => {
   const parts = name.trim().split(/\s+/);
 
@@ -18,27 +20,18 @@ const getInitials = (name: string) => {
 //predefined colors fun to generate the colors 
 const getColorFromName = (name: string) => {
   const colors = [
-    'bg-blue-500 text-white',
-    'bg-green-500 text-white',
-    'bg-purple-500 text-white',
-    'bg-red-500 text-white',
-    'bg-yellow-500 text-black',
-    'bg-indigo-500 text-white',
-    'bg-pink-500 text-white',
-    'bg-teal-500 text-white',
-    'bg-orange-500 text-white',
-    'bg-cyan-500 text-black',
-    'bg-emerald-500 text-white',
-    'bg-violet-500 text-white',
-    'bg-rose-500 text-white',
-    'bg-amber-500 text-black',
-    'bg-lime-500 text-black',
-    'bg-sky-500 text-white',
-    'bg-fuchsia-500 text-white',
-    'bg-slate-500 text-white',
-    'bg-stone-500 text-white',
-    'bg-zinc-500 text-white',
-  ];
+  'bg-blue-600 text-white',
+  'bg-green-600 text-white',
+  'bg-red-500 text-white',
+  'bg-yellow-400 text-black',
+  'bg-purple-600 text-white',
+  'bg-pink-500 text-white',
+  'bg-teal-500 text-white',
+  'bg-orange-400 text-black',
+  'bg-indigo-600 text-white',
+  'bg-cyan-500 text-white',
+];
+
   
   let hash = 0;
   for (let i = 0; i < name.length; i++) {
@@ -50,7 +43,9 @@ const getColorFromName = (name: string) => {
   const index = Math.abs(hash) % colors.length;
   return colors[index];
 };
-const Avatar = ({ name } : {name : string}) => {
+
+
+const Avatar = ({ name } : AvatarProps ) => {
   const initials = getInitials(name).toUpperCase();
   const colorClass : string =  getColorFromName(name);
   return (

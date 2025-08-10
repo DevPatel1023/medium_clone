@@ -8,7 +8,7 @@ const AppBar = () => {
     <div className="flex w-full px-4 py-2 items-center justify-between border-b border-gray-400 whitespace-nowrap">
       {/* Left-side: Title + Search */}
       <div className="flex items-center gap-5">
-        <Link to="/">
+        <Link to="/blogs">
         <h1 className="font-medium text-2xl">Medium</h1>
         </Link>
         <SearchBar />
