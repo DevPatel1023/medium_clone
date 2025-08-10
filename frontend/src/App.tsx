@@ -4,8 +4,9 @@ import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import Blog from "./pages/Blog";
 import Blogs from "./pages/Blogs";
+import CreateBlog from "./pages/createBlog";
 import MainLayout from "./pages/MainLayout";
-
+    
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<MainLayout />}>
           <Route path="blogs" element={<Blogs />} />
           <Route path="blog/:id" element={<Blog />} />
+          <Route path="publish" element={<CreateBlog />} />
         </Route>
       </Routes>
     </BrowserRouter>

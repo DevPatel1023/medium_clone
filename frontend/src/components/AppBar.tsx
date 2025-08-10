@@ -16,7 +16,9 @@ const AppBar = () => {
 
       {/* Right-side: Icon + Avatar */}
       <div className="flex items-center gap-5">
+        <Link to='/publish'>
         <SquarePen />
+        </Link>
         <Avatar name="dev" />
       </div>
     </div>
