@@ -34,9 +34,15 @@ const Blog = () => {
       <div className=" md:col-span-4">
         {/* user details */}
         <h3 className="pl-2 text-gray-600">&#x2022; Author</h3>
-        <div className="flex gap-3 justify-start flex-row py-5">
+        <div className="flex gap-3 justify-start flex-col  py-5">
+          <div className="flex gap-2">
           <Avatar name={blog?.author.name ?? "Annoymous"} />
           <p className="inline font-bold text-xl text-gray-600">{blog?.author.name}</p>
+          </div>
+           <p className="text-gray-600 text-sm leading-relaxed">
+                Writer and content creator passionate about sharing insights and stories. 
+                Follow for more to read such articles.
+              </p>
         </div>
       </div>
     </div>
