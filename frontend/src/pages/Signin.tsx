@@ -29,7 +29,9 @@ const Signin = () => {
       });
       
       const jwt = res.data.jwt_token;
+      const user = res.data.user;
       localStorage.setItem("token", jwt);
+      localStorage.setItem("user", user);
       navigate("/blogs");
     } catch (error: any) {
       console.log("Error while signing in:", error);

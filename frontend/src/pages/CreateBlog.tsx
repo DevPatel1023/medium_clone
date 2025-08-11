@@ -18,7 +18,7 @@ const CreateBlog = () => {
       console.error("Token not found");
       return;
     }
-    axios.post(`${backend_url}/api/v1/blog/create}`, {
+    axios.post(`${backend_url}/api/v1/blog/create`, {
       title,
       content
     },{
