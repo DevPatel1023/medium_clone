@@ -5,13 +5,6 @@ import { useBlogs } from "../hooks/useBlogs";
 const Blogs = () => {
   const { loading, blogs } = useBlogs();
 
-  if (loading) {
-    return (
-      <div>
-        <BlogSkeleton />
-      </div>
-    );
-  }
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
@@ -24,16 +17,21 @@ const Blogs = () => {
             Discover insights, tutorials, and stories from our community
           </p>
         </div>
-        {blogs.map((blog) => (
-          <BlogCard
-          key={blog.id}
-          id={blog.id}
-            authorName={blog.author.name || "Anonymous"}
-            title={blog.title}
-            content={blog.content}
-            publishedDate={(blog.createdAt)}
-          />
-        ))}
+
+        {/* Show skeletons while loading */}
+        {loading
+  ? Array.from({ length: 5 }).map((_, idx) => <BlogSkeleton key={idx} />)
+  : blogs.map((blog) => (
+      <BlogCard
+        key={blog.id}
+        id={blog.id}
+        authorName={blog.author?.name || "Anonymous"}
+        title={blog.title}
+        content={blog.content}
+        publishedDate={blog.createdAt}
+      />
+    ))}
+
       </div>
     </div>
   );
