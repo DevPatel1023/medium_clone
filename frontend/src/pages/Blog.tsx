@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
-import BlogSkeleton from "../components/BlogSkeleton";
 import { useGetBlog } from "../hooks/usegetBlog";
 import Avatar from "../components/Avatar";
 import { formatDate } from "../utils/FormatDate";
 import { capitalizeWords } from "../utils/capitalizeWords";
+import MainBlogSkeleton from "../components/MainBlogSkeleton";
 
 const Blog = () => {
   const { id } = useParams<{ id: string }>();
@@ -11,7 +11,7 @@ const Blog = () => {
   const { loading, blog } = useGetBlog(id ?? "");
 
   if (loading) {
-    return <BlogSkeleton />;
+    return <MainBlogSkeleton />;
   }
 
   return (

@@ -2,7 +2,7 @@ const BlogSkeleton = () => {
   return (
     <div className="p-6 border-b border-gray-200 animate-pulse max-w-3xl mx-auto space-y-4">
       <div>
-        <div className=" py-8 px-0 border-b border-gray-100 ">
+        <div className=" py-8 px-0 ">
           {/* Author Info */}
           <div className="flex items-center gap-3 mb-4">
             <div className="w-10 h-10 rounded-full bg-gray-300"></div>

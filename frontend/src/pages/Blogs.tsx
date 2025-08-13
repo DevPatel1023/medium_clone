@@ -1,5 +1,5 @@
 import BlogCard from "../components/BlogCard";
-import BlogSkeleton from "../components/BlogSkeleton";
+import BlogSkeleton from "../components/BlogsSkeleton";
 import { useBlogs } from "../hooks/useBlogs";
 
 const Blogs = () => {
