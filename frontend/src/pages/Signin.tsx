@@ -29,7 +29,10 @@ const Signin = () => {
       });
       
       const jwt = res.data.jwt_token;
-      const user = res.data.user;
+      console.log(jwt);
+      
+      const user = JSON.stringify(res.data.user);
+      console.log(user);
       localStorage.setItem("token", jwt);
       localStorage.setItem("user", user);
       navigate("/blogs");

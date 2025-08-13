@@ -69,10 +69,11 @@ userRoute.post("/signin", async (c) => {
       email,
       password
     );
+    const {password : _password,...loginUserData} = user;
 
     return c.json({
       message: "welcome user",
-      user,
+      user:loginUserData,
       jwt_token,
     });
   } catch (e: any) {
