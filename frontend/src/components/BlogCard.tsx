@@ -46,7 +46,7 @@ const BlogCard = ({
             {capitalizeWords(title)}
           </h2>
           <p className="text-gray-600 text-base leading-relaxed line-clamp-3 mb-4">
-            {content.length > 150 ? content.slice(0, 150) + "..." : content}
+            {content.length > 350 ? content.slice(0, 350) + "..." : content}
           </p>
         </div>
 
